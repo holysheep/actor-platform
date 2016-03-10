@@ -310,6 +310,7 @@ private final class WebrtcCallActor extends StashingActor with ActorLogging with
                   val sessionId =
                     sessions.getOrElse(Pair.buildUnsafe(device.deviceId, pairDevice.deviceId), connect(device, pairDevice))
 
+                  log.debug("Sending EnableConnection to {} and {}", device.deviceId, pairDevice.deviceId)
                   eventBusExt.post(
                     EventBus.InternalClient(self),
                     eventBusId,
