@@ -162,9 +162,9 @@ private final class WebrtcCallActor extends StashingActor with ActorLogging with
     peerSettings: Option[ApiPeerSettings],
     isJoined:     Boolean
   ) {
-    def canPreConnect(pairPeerSettings: Option[ApiPeerSettings]): Boolean =
-      isJoined ||
-        (peerSettings.map(_.canPreConnect).contains(true) && pairPeerSettings.map(_.canPreConnect).contains(true))
+    def canPreConnect(pairDevice: Device): Boolean =
+      (isJoined && pairDevice.isJoined) ||
+        (peerSettings.flatMap(_.canPreConnect).contains(true) && pairDevice.peerSettings.flatMap(_.canPreConnect).contains(true))
   }
 
   object Pair {
