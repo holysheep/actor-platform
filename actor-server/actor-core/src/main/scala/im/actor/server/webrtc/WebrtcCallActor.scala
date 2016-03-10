@@ -248,6 +248,8 @@ private final class WebrtcCallActor extends StashingActor with ActorLogging with
         if (isConversationStarted) ApiServiceMessage("Call ended", Some(ApiServiceExPhoneCall(duration)))
         else ApiServiceMessage("Missed call", Some(ApiServiceExPhoneMissed))
 
+      log.debug("Senfing smsg {} {}", smsg, memberUserIds)
+
       (for {
         _ ← if (peer.`type`.isPrivate) FutureExt.ftraverse(memberUserIds.toSeq)(userId ⇒ dialogExt.sendMessage(
           peer = ApiPeer(ApiPeerType.Private, callerUserId),
