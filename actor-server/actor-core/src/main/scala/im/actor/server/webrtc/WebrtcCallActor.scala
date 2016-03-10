@@ -372,7 +372,7 @@ private final class WebrtcCallActor extends StashingActor with ActorLogging with
               val newDevice = Device(deviceId, ebMessage.client, msg.peerSettings, isJoined = deviceId == callerDeviceId)
               log.debug(s"newDevice ${newDevice.deviceId} ${newDevice.peerSettings}")
               devices.values.view filterNot (_.deviceId == newDevice.deviceId) foreach { pairDevice ⇒
-                if (pairDevice.canPreConnect(msg.peerSettings)) {
+                if (pairDevice.canPreConnect(newDevice)) {
                   log.debug(s"canPreConnect is true for device ${pairDevice.deviceId} ${pairDevice.peerSettings}")
                   connect(newDevice, pairDevice)
                 }
