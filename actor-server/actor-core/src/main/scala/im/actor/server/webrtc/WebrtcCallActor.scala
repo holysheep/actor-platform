@@ -274,6 +274,7 @@ private final class WebrtcCallActor extends StashingActor with ActorLogging with
 
     def connect(device: Device, pairDevice: Device): SessionId = {
       val sessionId = Random.nextLong()
+      log.debug(s"Sending NeedOffer to ${device.deviceId} with ${pairDevice.deviceId}")
       eventBusExt.post(
         EventBus.InternalClient(self),
         eventBusId,
