@@ -54,7 +54,18 @@ object FormMaker {
         label = "Save to templates",
         checked = true
       )
-    )
+    ),
+    isStatic = false
+  )
+
+  val actionForm = ActionForm(
+    action = "play",
+    name = "playF",
+    List(
+      Button(true, "play", "Play motherfucker"),
+      Button(false, "stop", "Stop motherfucker")
+    ),
+    isStatic = false
   )
 
   //  import upickle.default._

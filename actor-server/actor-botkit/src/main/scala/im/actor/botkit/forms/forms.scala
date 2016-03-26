@@ -108,8 +108,27 @@ object Form {
   def parse(json: String): Form = read[Form](json)
 }
 
-final case class Form(name: String, inputs: List[Input]) {
+final case class Form(name: String, inputs: List[Input], isStatic: Boolean) {
   import upickle.default._
-  def this(name: String, inputs: java.util.List[Input]) = this(name, inputs.toList)
+  def this(name: String, inputs: java.util.List[Input], isStatic: Boolean) = this(name, inputs.toList, isStatic)
+  def toJson: String = write(this)
+}
+
+object ActionForm {
+  import upickle.default._
+  def parseOption(json: String): Option[ActionForm] = {
+    val tryParse = Try(read[ActionForm](json))
+    tryParse match {
+      case Success(actForm) ⇒ println(s"==========parsed action form: $actForm")
+      case Failure(e)       ⇒ println(s"==============failed to parse form: $e")
+    }
+    tryParse.toOption
+  }
+  def parse(json: String): ActionForm = read[ActionForm](json)
+}
+final case class ActionForm(action: String, name: String, inputs: List[Input], isStatic: Boolean) {
+  import upickle.default._
+  def this(action: String, name: String, inputs: java.util.List[Input], isStatic: Boolean) =
+    this(action, name, inputs.toList, isStatic)
   def toJson: String = write(this)
 }
