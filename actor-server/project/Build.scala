@@ -149,7 +149,8 @@ object Build extends sbt.Build with Versioning with Releasing {
     settings = defaultSettingsBotkit ++ Revolver.settings ++ Seq(
       version := BotKitVersion,
       libraryDependencies ++= Dependencies.botkit,
-      addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+      addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+      initialCommands in console := "import im.actor.botkit.forms._, upickle.default._"
     )
   )
     .dependsOn(actorBotsShared)
