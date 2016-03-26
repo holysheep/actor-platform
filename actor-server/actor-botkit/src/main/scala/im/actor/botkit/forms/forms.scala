@@ -1,7 +1,9 @@
 package im.actor.botkit.forms
 
 import derive.key
+
 import scala.collection.JavaConversions._
+import scala.util.{ Failure, Success, Try }
 
 sealed trait Input {
   def enabled: Boolean
@@ -93,6 +95,14 @@ final case class Checkbox(
 
 object Form {
   import upickle.default._
+  def parseOption(json: String): Option[Form] = {
+    val tryParse = Try(read[Form](json))
+    tryParse match {
+      case Success(form) ⇒ println(s"==========parsed form: $form")
+      case Failure(e)    ⇒ println(s"==============failed to parse form: $e")
+    }
+    tryParse.toOption
+  }
   def parse(json: String): Form = read[Form](json)
 }
 
