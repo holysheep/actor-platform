@@ -1,5 +1,7 @@
 package im.actor.botkit.forms
 
+import java.util
+
 import derive.key
 
 import scala.collection.JavaConversions._
@@ -110,6 +112,7 @@ object Form {
 
 final case class Form(name: String, inputs: List[Input], isStatic: Boolean) {
   import upickle.default._
+  def getInputs: util.List[Input] = seqAsJavaList(inputs)
   def this(name: String, inputs: java.util.List[Input], isStatic: Boolean) = this(name, inputs.toList, isStatic)
   def toJson: String = write(this)
 }
@@ -127,6 +130,7 @@ object ActionForm {
   def parse(json: String): ActionForm = read[ActionForm](json)
 }
 final case class ActionForm(action: String, name: String, inputs: List[Input], isStatic: Boolean) {
+  def getInputs: util.List[Input] = seqAsJavaList(inputs)
   import upickle.default._
   def this(action: String, name: String, inputs: java.util.List[Input], isStatic: Boolean) =
     this(action, name, inputs.toList, isStatic)
