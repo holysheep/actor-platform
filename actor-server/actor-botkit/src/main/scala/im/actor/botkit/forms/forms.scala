@@ -114,10 +114,11 @@ object Form {
   def parse(json: String): Form = read[Form](json)
 }
 
-final case class Form(name: String, inputs: List[Input], isStatic: Boolean) {
+final case class Form(name: String, inputs: List[Input], isStatic: Boolean, color: String) {
   import upickle.default._
   def getInputs: util.List[Input] = seqAsJavaList(inputs)
-  def this(name: String, inputs: java.util.List[Input], isStatic: Boolean) = this(name, inputs.toList, isStatic)
+  def this(name: String, inputs: java.util.List[Input], isStatic: Boolean, color: String) =
+    this(name, inputs.toList, isStatic, color)
   def toJson: String = write(this)
 }
 
@@ -133,10 +134,10 @@ object ActionForm {
   }
   def parse(json: String): ActionForm = read[ActionForm](json)
 }
-final case class ActionForm(action: String, name: String, inputs: List[Input], isStatic: Boolean) {
+final case class ActionForm(action: String, name: String, inputs: List[Input], isStatic: Boolean, color: String) {
   def getInputs: util.List[Input] = seqAsJavaList(inputs)
   import upickle.default._
-  def this(action: String, name: String, inputs: java.util.List[Input], isStatic: Boolean) =
-    this(action, name, inputs.toList, isStatic)
+  def this(action: String, name: String, inputs: java.util.List[Input], isStatic: Boolean, color: String) =
+    this(action, name, inputs.toList, isStatic, color)
   def toJson: String = write(this)
 }

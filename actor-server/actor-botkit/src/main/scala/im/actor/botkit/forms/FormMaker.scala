@@ -55,7 +55,8 @@ object FormMaker {
         checked = true
       )
     ),
-    isStatic = false
+    isStatic = false,
+    color = "#ffcc00"
   )
 
   val actionForm = ActionForm(
@@ -65,7 +66,8 @@ object FormMaker {
       Button(true, "play", "Play motherfucker"),
       Button(false, "stop", "Stop motherfucker")
     ),
-    isStatic = false
+    isStatic = false,
+    color = "#ffcc00"
   )
 
   //  import upickle.default._
