@@ -45,7 +45,8 @@ object FormMaker {
           Element(2, "Holod")
         ),
         // none are selected
-        -1
+        selected = -1,
+        sendOnChange = true
       ),
       Checkbox(
         enabled = true,

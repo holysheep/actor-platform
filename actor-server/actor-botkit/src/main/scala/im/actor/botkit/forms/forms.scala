@@ -70,19 +70,21 @@ final case class Element(id: Int, value: String)
 // if none are selected, selected=-1
 @key("ElementsList")
 final case class ElementsList(
-  enabled:  Boolean,
-  name:     String,
-  label:    String,
-  elems:    List[Element],
-  selected: Int
+  enabled:      Boolean,
+  name:         String,
+  label:        String,
+  elems:        List[Element],
+  selected:     Int,
+  sendOnChange: Boolean
 ) extends Input {
   def this(
-    enabled:  Boolean,
-    name:     String,
-    label:    String,
-    elems:    java.util.List[Element],
-    selected: Int
-  ) = this(enabled, name, label, elems.toList, selected)
+    enabled:      Boolean,
+    name:         String,
+    label:        String,
+    elems:        java.util.List[Element],
+    selected:     Int,
+    sendOnChange: Boolean
+  ) = this(enabled, name, label, elems.toList, selected, sendOnChange)
 }
 
 @key("Checkbox")
