@@ -55,7 +55,7 @@ object FormMaker {
         checked = true
       )
     ),
-    isStatic = false,
+    enabled = true,
     color = "#ffcc00"
   )
 
@@ -66,7 +66,7 @@ object FormMaker {
       Button(true, "play", "Play motherfucker"),
       Button(false, "stop", "Stop motherfucker")
     ),
-    isStatic = false,
+    enabled = true,
     color = "#ffcc00"
   )
 

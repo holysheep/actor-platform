@@ -11,7 +11,6 @@ sealed trait Input {
   def enabled: Boolean
   def name: String
   def label: String
-  //  def validate[T <: Input]: String Xor T
 }
 
 object InputType {
@@ -101,6 +100,15 @@ final case class Checkbox(
   checked: Boolean
 ) extends Input
 
+@key("DatePicker")
+final case class DatePicker(
+  enabled: Boolean,
+  name:    String,
+  label:   String,
+  data:    String,
+  ts:      Long
+) extends Input
+
 object Form {
   import upickle.default._
   def parseOption(json: String): Option[Form] = {
@@ -114,11 +122,11 @@ object Form {
   def parse(json: String): Form = read[Form](json)
 }
 
-final case class Form(name: String, inputs: List[Input], isStatic: Boolean, color: String) {
+final case class Form(name: String, inputs: List[Input], enabled: Boolean, color: String) {
   import upickle.default._
   def getInputs: util.List[Input] = seqAsJavaList(inputs)
-  def this(name: String, inputs: java.util.List[Input], isStatic: Boolean, color: String) =
-    this(name, inputs.toList, isStatic, color)
+  def this(name: String, inputs: java.util.List[Input], enabled: Boolean, color: String) =
+    this(name, inputs.toList, enabled, color)
   def toJson: String = write(this)
 }
 
@@ -134,10 +142,10 @@ object ActionForm {
   }
   def parse(json: String): ActionForm = read[ActionForm](json)
 }
-final case class ActionForm(action: String, name: String, inputs: List[Input], isStatic: Boolean, color: String) {
+final case class ActionForm(action: String, name: String, inputs: List[Input], enabled: Boolean, color: String) {
   def getInputs: util.List[Input] = seqAsJavaList(inputs)
   import upickle.default._
-  def this(action: String, name: String, inputs: java.util.List[Input], isStatic: Boolean, color: String) =
-    this(action, name, inputs.toList, isStatic, color)
+  def this(action: String, name: String, inputs: java.util.List[Input], enabled: Boolean, color: String) =
+    this(action, name, inputs.toList, enabled, color)
   def toJson: String = write(this)
 }
