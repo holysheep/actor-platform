@@ -26,7 +26,8 @@ object FormMaker {
         name = "songProgress",
         label = "",
         progress = 53,
-        showHandle = true
+        showHandle = true,
+        sendOnChange = false
       ),
       Label(
         enabled = true,

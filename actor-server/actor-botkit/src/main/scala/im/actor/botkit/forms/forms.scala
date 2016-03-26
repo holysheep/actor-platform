@@ -45,13 +45,15 @@ final case class Button(
 ) extends Input
 
 // progress is 0 to 100
+// sendOnChange is false by default
 @key("Slider")
 final case class Slider(
-  enabled:    Boolean,
-  name:       String,
-  label:      String,
-  progress:   Int,
-  showHandle: Boolean
+  enabled:      Boolean,
+  name:         String,
+  label:        String,
+  progress:     Int,
+  showHandle:   Boolean,
+  sendOnChange: Boolean
 ) extends Input
 
 @key("Label")
@@ -89,6 +91,13 @@ final case class Checkbox(
   checked: Boolean
 ) extends Input
 
+object Form {
+  import upickle.default._
+  def parse(json: String): Form = read[Form](json)
+}
+
 final case class Form(name: String, inputs: List[Input]) {
+  import upickle.default._
   def this(name: String, inputs: java.util.List[Input]) = this(name, inputs.toList)
+  def toJson: String = write(this)
 }
