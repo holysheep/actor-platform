@@ -1,9 +1,9 @@
 package im.actor.botkit.forms
 
 import derive.key
+import scala.collection.JavaConversions._
 
 sealed trait Input {
-  def typ: String
   def enabled: Boolean
   def name: String
   def label: String
@@ -34,9 +34,7 @@ final case class TextInput(
   label:     String,
   inputType: Int,
   data:      String
-) extends Input {
-  val typ = "TextInput"
-}
+) extends Input
 
 // for button name is action
 @key("Button")
@@ -44,9 +42,7 @@ final case class Button(
   enabled: Boolean,
   name:    String,
   label:   String
-) extends Input {
-  val typ = "Button"
-}
+) extends Input
 
 // progress is 0 to 100
 @key("Slider")
@@ -56,18 +52,14 @@ final case class Slider(
   label:      String,
   progress:   Int,
   showHandle: Boolean
-) extends Input {
-  val typ = "Slider"
-}
+) extends Input
 
 @key("Label")
 final case class Label(
   enabled: Boolean,
   name:    String,
   label:   String
-) extends Input {
-  val typ = "Label"
-}
+) extends Input
 
 final case class Element(id: Int, value: String)
 
@@ -80,7 +72,13 @@ final case class ElementsList(
   elems:    List[Element],
   selected: Int
 ) extends Input {
-  val typ = "ElementsList"
+  def this(
+    enabled:  Boolean,
+    name:     String,
+    label:    String,
+    elems:    java.util.List[Element],
+    selected: Int
+  ) = this(enabled, name, label, elems.toList, selected)
 }
 
 @key("Checkbox")
@@ -89,8 +87,6 @@ final case class Checkbox(
   name:    String,
   label:   String,
   checked: Boolean
-) extends Input {
-  val typ = "Checkbox"
-}
+) extends Input
 
 final case class Form(name: String, inputs: List[Input])
