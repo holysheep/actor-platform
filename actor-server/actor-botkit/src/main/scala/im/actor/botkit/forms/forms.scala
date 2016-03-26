@@ -89,4 +89,6 @@ final case class Checkbox(
   checked: Boolean
 ) extends Input
 
-final case class Form(name: String, inputs: List[Input])
+final case class Form(name: String, inputs: List[Input]) {
+  def this(name: String, inputs: java.util.List[Input]) = this(name, inputs.toList)
+}
