@@ -18,6 +18,7 @@ object InputType {
   def fromInt: PartialFunction[Int, InputType] = {
     case 0 ⇒ Numeric
     case 1 ⇒ Text
+    case 2 ⇒ Password
   }
 }
 sealed trait InputType {
@@ -28,6 +29,9 @@ case object Numeric extends InputType {
 }
 case object Text extends InputType {
   def toInt = 1
+}
+case object Password extends InputType {
+  def toInt = 2
 }
 
 // inputType: numeric = 0; text=1;
