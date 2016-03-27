@@ -100,13 +100,15 @@ final case class Checkbox(
   checked: Boolean
 ) extends Input
 
+//pickerType: 0 for date, 1 for time
 @key("DatePicker")
 final case class DatePicker(
-  enabled: Boolean,
-  name:    String,
-  label:   String,
-  data:    String,
-  ts:      Long
+  enabled:    Boolean,
+  name:       String,
+  label:      String,
+  data:       String,
+  ts:         Long,
+  pickerType: Int
 ) extends Input
 
 object Form {
