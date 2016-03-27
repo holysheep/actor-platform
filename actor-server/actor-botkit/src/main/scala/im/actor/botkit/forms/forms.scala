@@ -90,6 +90,7 @@ final case class ElementsList(
     selected:     Int,
     sendOnChange: Boolean
   ) = this(enabled, name, label, elems.toList, selected, sendOnChange)
+  def getElems: util.List[Element] = seqAsJavaList(elems)
 }
 
 @key("Checkbox")
