@@ -1,4 +1,4 @@
-package im.actor.sdk.controllers.calls;
+package im.actor.sdk.controllers.calls.view;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -110,7 +110,7 @@ public class AudioStreamVolumeValueActor extends Actor {
     interface VolumeValueListener{
         void onVolumeValue(int val);
     }
-    
+
     public static class Subscribe{
         VolumeValueListener callback;
 
@@ -134,6 +134,6 @@ public class AudioStreamVolumeValueActor extends Actor {
             return callback;
         }
     }
-    
+
     private static class Check{}
 }
